@@ -61,18 +61,18 @@ public class Recursive_pf {
     //      W+L
     //  L
     
-    private static double calc_pf(double probability, double riskreward, int trades) {
-        if(trades == 1) return probability*riskreward - (1-probability);
-        double pf = Math.pow(probability, (double)trades) * (trades * riskreward);
-        pf += calc_pf_tails(probability, riskreward, trades);
+    private static double calc_pf(double prob, double riskrew, int trades) {
+        if(trades == 1) return prob*riskrew - (1-prob);
+        double pf = Math.pow(prob, (double)trades) * (trades * riskrew);
+        pf += calc_pf_tails(prob, riskrew, trades);
         return pf;
     }
     
-    private static double calc_pf_tails(double probability, double riskreward, int trades) {
-        if(trades == 1) return -1*(1-probability);
-        double sub_prob = Math.pow(probability, (double)trades-1.0);
-        double pf_tails = sub_prob*(riskreward*(trades-1)) - sub_prob*(1-probability);
-        pf_tails += calc_pf_tails(probability, riskreward, trades-1);
+    private static double calc_pf_tails(double prob, double riskrew, int trades) {
+        if(trades == 1) return -1*(1-prob);
+        double sub_prob = Math.pow(prob, (double)trades-1.0);
+        double pf_tails = sub_prob*(riskrew*(trades-1)) - sub_prob*(1-prob);
+        pf_tails += calc_pf_tails(prob, riskrew, trades-1);
         return pf_tails;
     }
 }
